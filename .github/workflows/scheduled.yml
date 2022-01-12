@@ -10,5 +10,5 @@ jobs:
       - name: Set time
         run: echo "::set-output name=TIME::$(date)"
         id: set-time
-      - name: Get time
-        run: echo "The current time is ${{ steps.set-date.outputs.TIME }}"    
+      - name: Running this step at ${{ steps.set-time.outputs.TIME }}
+        run: echo "The current time is ${{ steps.set-time.outputs.TIME }}"    
