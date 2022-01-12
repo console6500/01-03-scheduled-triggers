@@ -2,8 +2,8 @@ name: Scheduled workflow
 on:
   push:
   schedule:
-    - cron: '*/10 * * * *'
-    - cron: '*/15 * * * *'
+    - cron: '*/7 * * * *'
+    - cron: '37 6 * * *'
 jobs:
   date:
     runs-on: ubuntu-latest
@@ -11,5 +11,5 @@ jobs:
       - name: Set time
         run: echo "::set-output name=TIME::$(date)"
         id: set-time
-      - name: Running this step at ${{ steps.set-time.outputs.TIME }}
+      - name: Starting the nightly build at ${{ steps.set-time.outputs.TIME }}
         run: echo "The current time is ${{ steps.set-time.outputs.TIME }}"    
