@@ -1,0 +1,14 @@
+name: Scheduled workflow
+on:
+  push:
+  schedule:
+    - cron: '*/10 * * * *'
+jobs:
+  date:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set time
+        run: echo "::set-output name=TIME::$(date)"
+        id: set-time
+      - name: Get time
+        run: echo "The current time is ${{ steps.set-date.outputs.TIME }}"    
