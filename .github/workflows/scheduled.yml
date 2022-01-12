@@ -3,6 +3,7 @@ on:
   push:
   schedule:
     - cron: '*/10 * * * *'
+    - cron: '*/15 * * * *'
 jobs:
   date:
     runs-on: ubuntu-latest
