@@ -20,5 +20,5 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
          name: nightly-${{ steps.set-time.outputs.TIME }}.tar
-         path: ./nightly-$(date +%F).tar
+         path: nightly-${{ steps.set-time.outputs.TIME }}.tar
 
