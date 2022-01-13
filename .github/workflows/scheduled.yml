@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Set time
-        run: echo "::set-output name=TIME::$(date)"
+        run: echo "::set-output name=TIME::$(date %F)"
         id: set-time
       - name: Starting the nightly build at ${{ steps.set-time.outputs.TIME }}
         run: echo "The current time is ${{ steps.set-time.outputs.TIME }}"
@@ -19,6 +19,6 @@ jobs:
       - name: Upload the artifact
         uses: actions/upload-artifact@v2
         with:
-         name: nightly-$(date +%F).tar
+         name: nightly-${{ steps.set-time.outputs.TIME }}.tar
          path: ./nightly-$(date +%F).tar
 
