@@ -1,8 +1,8 @@
-name: Scheduled workflow
+name: Nightly Build
 on:
-  push:
+  workflow_dispatch:
   schedule:
-    - cron: '*/7 * * * *'
+    - cron: '17 6 * * *'
 jobs:
   date:
     runs-on: ubuntu-latest
@@ -11,4 +11,14 @@ jobs:
         run: echo "::set-output name=TIME::$(date)"
         id: set-time
       - name: Starting the nightly build at ${{ steps.set-time.outputs.TIME }}
-        run: echo "The current time is ${{ steps.set-time.outputs.TIME }}"    
+        run: echo "The current time is ${{ steps.set-time.outputs.TIME }}"
+      - name: Check out the code
+        uses: actions/checkout@v2
+      - name: Create the tarball
+        run: tar -cvf nightly-$(date +%F).tar ./*
+      - name: Upload the artifact
+        uses: actions/upload-artifact@v2
+        with:
+         name: nightly-$(date +%F).tar
+         path: ./nightly-$(date +%F).tar
+
